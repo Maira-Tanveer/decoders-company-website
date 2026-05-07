@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #765EED;
+  --color-primary-light: #9580F5;
+  --color-primary-dark: #5A3FD6;
+  --color-primary-50: #f3f1fe;
+  --color-primary-100: #e8e4fd;
+  --color-primary-200: #d1c9fb;
+  --color-primary-300: #b5a6f7;
+  --color-primary-400: #9580F5;
+  --color-primary-500: #765EED;
+  --color-primary-600: #5A3FD6;
+  --color-primary-700: #4830B0;
+  --color-primary-800: #3A2790;
+  --color-primary-900: #2D1F6E;
+  --color-dark: #0a0a0a;
+  --color-dark-light: #131313;
+  --color-dark-card: #161616;
+  --color-dark-surface: #1a1a1a;
+  --color-gray-subtle: #5c5c5c;
+  --color-gray-muted: #888888;
+  --color-off-white: #f0f0f0;
+  --color-white-64: rgba(255, 255, 255, 0.64);
+  --color-white-24: rgba(255, 255, 255, 0.24);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-black-10: rgba(0, 0, 0, 0.06);
+  --color-black-08: rgba(0, 0, 0, 0.04);
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Cal Sans", "Inter", sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0a0a0a;
+    color: #0a0a0a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
