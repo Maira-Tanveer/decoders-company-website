@@ -4,9 +4,10 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import logo from '../assets/logo.jpeg'
 
 const navLinks = [
-  { label: 'Works', hash: '#works' },
-  { label: 'About', hash: '#about' },
-  { label: 'Services', hash: '#services' },
+  { label: 'Home', href: '/' },
+  { label: 'Works', href: '/works' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
 ]
 
 export default function Navbar() {
@@ -65,7 +66,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.label}
-                onClick={() => handleNavClick(link.hash)}
+                onClick={() => link.href ? navigate(link.href) : handleNavClick(link.hash)}
                 className="text-[14px] text-gray-subtle hover:text-dark transition-colors font-medium cursor-pointer"
               >
                 {link.label}
@@ -115,7 +116,7 @@ export default function Navbar() {
                 {navLinks.map((link) => (
                   <button
                     key={link.label}
-                    onClick={() => { handleNavClick(link.hash); setMobileOpen(false) }}
+                    onClick={() => { link.href ? navigate(link.href) : handleNavClick(link.hash); setMobileOpen(false) }}
                     className="py-3 text-gray-subtle hover:text-dark transition-colors text-sm font-medium text-left cursor-pointer"
                   >
                     {link.label}

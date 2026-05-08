@@ -8,7 +8,7 @@ import About from '../components/About'
 import Testimonials from '../components/Testimonials'
 import WaysToWork from '../components/WaysToWork'
 import LogoTicker from '../components/LogoTicker'
-import CTA from '../components/CTA'
+
 import SectionDivider from '../components/SectionDivider'
 
 export default function Home() {
@@ -42,8 +42,6 @@ export default function Home() {
       <Testimonials />
       <SectionDivider />
       <WaysToWork />
-      <SectionDivider />
-      <CTA />
     </>
   )
 }
