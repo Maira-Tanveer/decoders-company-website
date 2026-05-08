@@ -116,7 +116,7 @@ export default function About() {
           </motion.div>
 
           {/* Main heading — all italic, static + scroll-reveal */}
-          <h2 className="font-display text-[22px] md:text-[32px] lg:text-[38px] leading-[1.2] tracking-tight font-semibold mb-10 max-w-[700px] italic">
+          <h2 className="font-sans text-[26px] md:text-[38px] lg:text-[46px] leading-[1.3] tracking-tight font-semibold mb-10 max-w-[700px] italic">
             <span className="text-gray-900">We help fast-moving startups design, build, and </span>
             {letters.map((char, i) => (
               <ScrollLetter

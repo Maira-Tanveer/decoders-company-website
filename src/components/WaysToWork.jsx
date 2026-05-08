@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
@@ -86,19 +87,23 @@ function ProjectBasedCard() {
             </div>
 
             {/* CTA */}
-            <motion.a
-              href="#contact"
+            <motion.div
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-              className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full
-                         bg-dark text-white text-[14px] font-medium mt-auto
-                         hover:bg-primary transition-colors duration-300
-                         shadow-[0_12px_12px_-6px_rgba(0,0,0,0.15)]"
+              className="mt-auto"
             >
-              Discuss Your Project
-              <ArrowIcon />
-            </motion.a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full
+                           bg-primary text-white text-[14px] font-medium
+                           hover:bg-dark transition-colors duration-300
+                           shadow-[0_12px_24px_-6px_rgba(118,94,237,0.35)]"
+              >
+                Discuss Your Project
+                <ArrowIcon />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -196,20 +201,24 @@ function DedicatedTeamCard() {
             </div>
 
             {/* CTA */}
-            <motion.a
-              href="#contact"
+            <motion.div
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-              className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full
-                         bg-white/10 text-white text-[14px] font-medium mt-auto
-                         border border-white/10
-                         hover:bg-primary hover:border-primary transition-all duration-300
-                         shadow-[0_12px_12px_-6px_rgba(0,0,0,0.3)]"
+              className="mt-auto"
             >
-              Build With Us
-              <ArrowIcon />
-            </motion.a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full
+                           bg-primary text-white text-[14px] font-medium
+                           border border-primary
+                           hover:bg-white hover:text-primary hover:border-white transition-all duration-300
+                           shadow-[0_12px_24px_-6px_rgba(118,94,237,0.35)]"
+              >
+                Build With Us
+                <ArrowIcon />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>

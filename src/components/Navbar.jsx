@@ -1,15 +1,26 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import logo from '../assets/logo.jpeg'
 
 const navLinks = [
-  { label: 'Works', href: '#works' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
+  { label: 'Works', hash: '#works' },
+  { label: 'About', hash: '#about' },
+  { label: 'Services', hash: '#services' },
 ]
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleNavClick = (hash) => {
+    if (location.pathname === '/') {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/', { state: { scrollTo: hash } })
+    }
+  }
 
   return (
     <header className="w-full bg-white">
@@ -40,37 +51,37 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between py-5">
           {/* Logo */}
-          <a href="#" className="shrink-0 block bg-black rounded-xl overflow-hidden px-4 py-2">
+          <Link to="/" className="shrink-0 block bg-black rounded-xl overflow-hidden px-4 py-2">
             <img
               src={logo}
               alt="Decoders Digital"
               className="h-[36px] md:h-[42px] w-auto object-contain"
               style={{ filter: 'hue-rotate(45deg) saturate(1.8) brightness(1.2)' }}
             />
-          </a>
+          </Link>
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8 lg:gap-12">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
-                className="text-[14px] text-gray-subtle hover:text-dark transition-colors font-medium"
+                onClick={() => handleNavClick(link.hash)}
+                className="text-[14px] text-gray-subtle hover:text-dark transition-colors font-medium cursor-pointer"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </div>
 
           {/* Contact Button */}
           <div className="hidden md:block">
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="px-6 py-2.5 rounded-full bg-primary text-white text-[14px] font-medium
                          hover:bg-primary-dark transition-colors duration-300"
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -102,21 +113,21 @@ export default function Navbar() {
             >
               <div className="flex flex-col py-4 gap-1">
                 {navLinks.map((link) => (
-                  <a
+                  <button
                     key={link.label}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="py-3 text-gray-subtle hover:text-dark transition-colors text-sm font-medium"
+                    onClick={() => { handleNavClick(link.hash); setMobileOpen(false) }}
+                    className="py-3 text-gray-subtle hover:text-dark transition-colors text-sm font-medium text-left cursor-pointer"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 ))}
-                <a
-                  href="#contact"
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileOpen(false)}
                   className="mt-2 px-6 py-2.5 rounded-full bg-primary text-white text-sm font-medium text-center"
                 >
                   Contact
-                </a>
+                </Link>
               </div>
             </motion.div>
           )}

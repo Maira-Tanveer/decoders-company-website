@@ -1,33 +1,29 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import RecentWorks from './components/RecentWorks'
-import Services from './components/Services'
-import About from './components/About'
-import Testimonials from './components/Testimonials'
-import WaysToWork from './components/WaysToWork'
-import LogoTicker from './components/LogoTicker'
 import Footer from './components/Footer'
-import SectionDivider from './components/SectionDivider'
+import ChatBot from './components/ChatBot'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
 import './App.css'
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <SectionDivider />
-      <RecentWorks />
-      <SectionDivider />
-      <Services />
-      <LogoTicker />
-      <SectionDivider />
-      <About />
-      <SectionDivider />
-      <Testimonials />
-      <SectionDivider />
-      <WaysToWork />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <ChatBot />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

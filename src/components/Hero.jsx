@@ -1,19 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef } from 'react'
 
-/**
- * Image choices — all cropped square, high-res, retina-ready:
- *
- * software → dark terminal / VS Code code editor (photo: Sai Kiran Anagani)
- *            Sharp green-on-black dev aesthetic. Reads instantly as "engineering".
- *
- * saas     → Clean Figma / product UI on a MacBook screen (photo: Balázs Kétyi)
- *            Shot: bQ9DojIMSgM — a crisp white SaaS product interface on a laptop.
- *            Crops to a beautiful blue-white palette that reads as "product/software".
- *
- * ai       → Abstract neural / data viz (photo: Google DeepMind)
- *            Kept — already works.
- */
 const inlineImages = {
   software: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&h=600&fit=crop&crop=top&q=100',
   saas:     'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=600&fit=crop&crop=center&q=100',
@@ -119,10 +106,10 @@ function InlineImage({ src, alt, delay, floatY = 6, floatDuration = 3.2, rotateD
               '0 10px 40px rgba(109,40,217,0.20), 0 2px 10px rgba(0,0,0,0.10)',
           }}
           className="
-            w-[30px]  h-[30px]
-            sm:w-[44px] sm:h-[44px]
-            md:w-[58px] md:h-[58px]
-            lg:w-[70px] lg:h-[70px]
+            w-[26px]  h-[26px]
+            sm:w-[36px] sm:h-[36px]
+            md:w-[46px] md:h-[46px]
+            lg:w-[56px] lg:h-[56px]
           "
         />
       </motion.span>
@@ -183,11 +170,11 @@ export default function Hero() {
         className="absolute inset-0 bg-gradient-to-b from-primary-50 via-white to-white pointer-events-none"
       />
 
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 pt-10 md:pt-14 pb-6 md:pb-8 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 pt-6 md:pt-8 pb-4 md:pb-6 flex flex-col items-center">
 
         <motion.h1
           style={{ y: headlineY, opacity: headlineOpacity, scale: headlineScale }}
-          className="font-display text-center text-[36px] sm:text-[48px] md:text-[64px] lg:text-[78px] leading-[1.15] tracking-tight text-dark"
+          className="font-display font-medium text-center text-[28px] sm:text-[38px] md:text-[50px] lg:text-[62px] leading-[1.15] tracking-tight text-dark"
         >
 
           {/* Line 1 — Custom [code editor] Software, */}
@@ -239,7 +226,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.6, type: 'spring', damping: 20 }}
-          className="text-center text-dark text-[15px] md:text-[17px] leading-7 max-w-[520px] mt-7 md:mt-9"
+          className="text-center text-dark text-[14px] md:text-[16px] leading-6 max-w-[520px] mt-4 md:mt-5"
         >
           Custom software, SaaS platforms, and AI-powered solutions
           built to grow modern businesses.
@@ -250,7 +237,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.6, type: 'spring', damping: 20 }}
-          className="mt-8 md:mt-10"
+          className="mt-5 md:mt-6"
         >
           <motion.a
             href="#works"

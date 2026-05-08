@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import project1 from '../assets/project-1.avif'
 import project2 from '../assets/project-2.avif'
 import project3 from '../assets/project-3.avif'
@@ -131,6 +131,9 @@ function SlideUpLink({ text, href }) {
   )
 }
 
+const cursorSpring = { damping: 30, stiffness: 200, mass: 0.4 }
+const glowSpring = { damping: 25, stiffness: 120 }
+
 function StickyProjectCard({ project, index }) {
   const ref = useRef(null)
   const cardRef = useRef(null)
@@ -141,104 +144,99 @@ function StickyProjectCard({ project, index }) {
     offset: ['start end', 'end start'],
   })
 
-  // Dramatic 3D tilt on scroll
-  const scrollRotateX = useTransform(scrollYProgress, [0, 1], [15, -15])
-  const scrollRotateY = useTransform(scrollYProgress, [0, 1], [-12, 12])
-  const scrollScale = useTransform(scrollYProgress, [0, 1], [0.94, 1.02])
-  const scrollTranslateZ = useTransform(scrollYProgress, [0, 1], [-30, 20])
+  // Smooth scroll-based scale
+  const scrollScaleRaw = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.97, 1, 1, 0.97])
+  const scrollScale = useSpring(scrollScaleRaw, { damping: 40, stiffness: 90 })
 
-  // Cursor-based tilt
-  const [cursorRotateX, setCursorRotateX] = useState(0)
-  const [cursorRotateY, setCursorRotateY] = useState(0)
-  const [glowPosition, setGlowPosition] = useState({ x: '50%', y: '50%' })
-  const [isHovering, setIsHovering] = useState(false)
+  // Cursor tilt — motion values only, zero re-renders
+  const cursorX = useMotionValue(0.5)
+  const cursorY = useMotionValue(0.5)
+  const hoverOpacity = useMotionValue(0)
+
+  const tiltX = useSpring(useTransform(cursorY, [0, 1], [3, -3]), cursorSpring)
+  const tiltY = useSpring(useTransform(cursorX, [0, 1], [-3, 3]), cursorSpring)
+
+  const hoverScaleRaw = useTransform(hoverOpacity, [0, 1], [1, 1.01])
+  const hoverScale = useSpring(hoverScaleRaw, cursorSpring)
+  const smoothGlow = useSpring(hoverOpacity, glowSpring)
+
+  // Combined scale: scroll * hover
+  const combinedScale = useTransform([scrollScale, hoverScale], ([s, h]) => s * h)
+
+  // Glow radial gradient
+  const glowBg = useTransform(
+    [cursorX, cursorY],
+    ([cx, cy]) =>
+      `radial-gradient(700px circle at ${cx * 100}% ${cy * 100}%, rgba(118,94,237,0.22) 0%, transparent 65%)`
+  )
+
+  // Border & shadow driven by glow
+  const borderColor = useTransform(smoothGlow, (v) => `rgba(118,94,237,${v * 0.35})`)
+  const cardShadow = useTransform(
+    smoothGlow,
+    (v) =>
+      `0 4px 32px rgba(0,0,0,${0.5 - v * 0.1}), 0 ${4 + v * 16}px ${32 + v * 28}px -15px rgba(118,94,237,${v * 0.35})`
+  )
+
+  // Image hover zoom
+  const imgScale = useTransform(smoothGlow, (v) => 1 + v * 0.03)
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-    const percentX = (x - centerX) / centerX
-    const percentY = (y - centerY) / centerY
-    const maxTilt = 8
-    setCursorRotateY(percentX * maxTilt)
-    setCursorRotateX(percentY * maxTilt * -1)
-    setGlowPosition({ x: `${(x / rect.width) * 100}%`, y: `${(y / rect.height) * 100}%` })
+    cursorX.set((e.clientX - rect.left) / rect.width)
+    cursorY.set((e.clientY - rect.top) / rect.height)
   }
 
+  const handleMouseEnter = () => hoverOpacity.set(1)
   const handleMouseLeave = () => {
-    setCursorRotateX(0)
-    setCursorRotateY(0)
-    setIsHovering(false)
-  }
-
-  const handleMouseEnter = () => {
-    setIsHovering(true)
+    hoverOpacity.set(0)
+    cursorX.set(0.5)
+    cursorY.set(0.5)
   }
 
   const stickyTop = 50 + index * 30
-  const animDelay = index * 0.15
-
-  const finalRotateX = isHovering
-    ? cursorRotateX
-    : scrollRotateX.get() + cursorRotateX * 0.2
-  const finalRotateY = isHovering
-    ? cursorRotateY
-    : scrollRotateY.get() + cursorRotateY * 0.2
-
-  const finalScale = isHovering ? 1.02 : scrollScale.get()
-  const finalTranslateZ = isHovering ? 0 : scrollTranslateZ.get()
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 160 }}
+      initial={{ opacity: 0, y: 80 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ type: 'spring', damping: 40, stiffness: 200, delay: 0.2 + animDelay }}
-      className="w-full lg:sticky perspective-[1500px]"
-      style={{ top: `${stickyTop}px`, zIndex: index + 1 }}
+      transition={{ duration: 1, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full lg:sticky"
+      style={{ top: `${stickyTop}px`, zIndex: index + 1, perspective: 1200 }}
     >
       <motion.div
         ref={cardRef}
         style={{
-          rotateX: finalRotateX,
-          rotateY: finalRotateY,
-          scale: finalScale,
-          translateZ: finalTranslateZ,
+          rotateX: tiltX,
+          rotateY: tiltY,
+          scale: combinedScale,
           transformStyle: 'preserve-3d',
-          transition: isHovering ? 'none' : 'transform 0.1s linear',
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onMouseEnter={handleMouseEnter}
         className="relative will-change-transform"
       >
-        {/* CARD with Black Background (only the card) */}
-        <div
-          className={`relative rounded-3xl overflow-hidden border transition-all duration-500 ${
-            isHovering
-              ? 'border-primary/40 bg-black/95 shadow-[0_20px_60px_-15px_rgba(118,94,237,0.4)] backdrop-blur-sm'
-              : 'border-gray-800 bg-black shadow-[0_4px_32px_rgba(0,0,0,0.5),0_1px_4px_rgba(0,0,0,0.2)]'
-          }`}
+        {/* CARD */}
+        <motion.div
+          className="relative rounded-3xl overflow-hidden border border-gray-800 bg-black"
+          style={{ borderColor, boxShadow: cardShadow }}
         >
-          {/* Glow Following Cursor */}
-          {isHovering && (
-            <div
-              className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-200"
-              style={{
-                background: `radial-gradient(circle at ${glowPosition.x} ${glowPosition.y}, rgba(118,94,237,0.35) 0%, rgba(118,94,237,0) 70%)`,
-              }}
-            />
-          )}
+          {/* Cursor glow */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none z-10"
+            style={{ background: glowBg, opacity: smoothGlow }}
+          />
 
-          {/* Glass blur overlay */}
-          {isHovering && (
-            <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-br from-white/5 via-transparent to-primary/10 backdrop-blur-[2px]" />
-          )}
+          {/* Glass overlay */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-br from-white/5 via-transparent to-primary/10"
+            style={{ opacity: smoothGlow }}
+          />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_456px_1fr] relative z-1">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_580px_1fr] relative z-1">
             {/* LEFT */}
             <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 gap-8 lg:gap-16">
               <div className="flex flex-col gap-5">
@@ -259,11 +257,11 @@ function StickyProjectCard({ project, index }) {
 
             {/* CENTER IMAGE */}
             <div className="relative w-full h-[280px] sm:h-[350px] lg:h-[570px] overflow-hidden shrink-0">
-              <img
+              <motion.img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-700"
-                style={{ transform: isHovering ? 'scale(1.03)' : 'scale(1)' }}
+                className="w-full h-full object-cover"
+                style={{ scale: imgScale }}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent mix-blend-overlay" />
 
@@ -303,7 +301,7 @@ function StickyProjectCard({ project, index }) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   )
@@ -314,7 +312,7 @@ export default function RecentWorks() {
     <section id="works" className="relative bg-white pb-[30px] md:pb-[50px]">
       <SectionHeading />
 
-      <div className="relative z-10 w-full max-w-[1180px] mx-auto px-5 md:px-10 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-10">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-5 md:px-10 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-10">
         <div className="flex flex-col gap-8 md:gap-12">
           {projects.map((project, i) => (
             <StickyProjectCard key={project.id} project={project} index={i} />
