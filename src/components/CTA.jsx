@@ -52,7 +52,7 @@ export default function CTA() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative bg-white py-[30px] md:py-[50px] overflow-hidden">
+    <section className="relative bg-white py-0 overflow-hidden">
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-[0.04]"
         style={{ background: 'radial-gradient(circle, #765EED, transparent 70%)' }}

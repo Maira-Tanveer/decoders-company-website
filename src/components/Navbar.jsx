@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import logo from '../assets/logo.jpeg'
+import logo from '../assets/logo1.png'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -24,22 +24,55 @@ export default function Navbar() {
   }
 
   return (
-    <header className="w-full bg-white">
-      {/* Top Availability Bar */}
+    <header className="w-full sticky top-0 z-50" style={{ background: '#1a1a1a' }}>
+
+      {/* Availability Bar */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.5 }}
-        className="flex justify-center py-2.5 bg-dark"
+        className="relative w-full"
+        style={{ height: '44px', background: '#1a1a1a' }}
       >
-        <div className="flex items-center gap-2 px-4 py-1 rounded-full bg-dark-light border border-white-10">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-          </span>
-          <span className="text-xs text-white font-medium">
-            Available for New Projects
-          </span>
+        {/* White fill ONLY inside the notch — clipped to scoop shape */}
+        <svg
+          viewBox="0 0 1440 44"
+          preserveAspectRatio="none"
+          className="absolute top-0 left-0 w-full h-full"
+          style={{ display: 'block' }}
+        >
+          {/* Full dark background first */}
+          <rect width="1440" height="44" fill="#1a1a1a" />
+
+          {/* Carve out white ONLY in the concave notch area from the top */}
+          <path
+            d="
+              M575,0
+              C585,0 592,0 600,8
+              C610,20 623,28 645,30
+              L795,30
+              C817,28 830,20 840,8
+              C848,0 855,0 865,0
+              Z
+            "
+            fill="white"
+          />
+        </svg>
+
+        {/* Badge — centered inside the white notch */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 z-10"
+          style={{ top: '2px' }}
+        >
+          <div className="flex items-center gap-2 px-5 py-1.5 whitespace-nowrap">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+            </span>
+            <span className="text-xs font-medium" style={{ color: '#1a1a1a' }}>
+              Available for New Projects
+            </span>
+          </div>
         </div>
       </motion.div>
 
@@ -49,15 +82,16 @@ export default function Navbar() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
         className="w-full max-w-[1440px] mx-auto px-5 md:px-10 lg:px-[60px] border-b border-black-08"
+        style={{ background: 'white' }}
       >
         <div className="flex items-center justify-between py-5">
           {/* Logo */}
-          <Link to="/" className="shrink-0 block bg-black rounded-xl overflow-hidden px-4 py-2">
+          <Link to="/" className="shrink-0 block">
             <img
               src={logo}
               alt="Decoders Digital"
-              className="h-[36px] md:h-[42px] w-auto object-contain"
-              style={{ filter: 'hue-rotate(45deg) saturate(1.8) brightness(1.2)' }}
+              className="h-[55px] md:h-[65px] w-auto object-contain"
+              style={{ filter: 'brightness(0) saturate(100%) invert(38%) sepia(52%) saturate(2800%) hue-rotate(237deg) brightness(97%) contrast(93%)' }}
             />
           </Link>
 
@@ -67,7 +101,7 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => link.href ? navigate(link.href) : handleNavClick(link.hash)}
-                className="text-[14px] text-gray-subtle hover:text-dark transition-colors font-medium cursor-pointer"
+                className="text-[14px] text-dark font-medium cursor-pointer"
               >
                 {link.label}
               </button>

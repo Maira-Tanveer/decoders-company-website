@@ -6,7 +6,7 @@ export default function SectionDivider() {
   const isInView = useInView(ref, { once: true, margin: '-20px' })
 
   return (
-    <div ref={ref} className="w-full flex justify-center py-3 md:py-4 bg-white overflow-hidden">
+    <div ref={ref} className="w-full flex justify-center py-6 md:py-10 bg-white overflow-hidden">
       <div className="relative flex items-center justify-center w-full max-w-[600px] px-10">
         {/* Left line with fade */}
         <motion.div

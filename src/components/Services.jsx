@@ -6,7 +6,7 @@ const services = [
     id: 1,
     title: 'Strategy & Research',
     description:
-      'Tempor lacus sodaleset conub accumsan ornare lifeTempor lacus sodaleset conub',
+      'We analyze your market, competitors, and users to craft a data-driven strategy for sustainable growth.',
     icon: (
       <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="4" y="5" width="24" height="18" rx="2" />
@@ -35,7 +35,7 @@ const services = [
     id: 2,
     title: 'Growth Tracking',
     description:
-      'Tempor lacus sodaleset conub accumsan ornare lifeTempor lacus sodaleset conub',
+      'Monitor key metrics and KPIs in real-time to optimize performance and accelerate business growth.',
     icon: (
       <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="22" cy="22" r="15" />
@@ -65,7 +65,7 @@ const services = [
     id: 3,
     title: 'Web Solution',
     description:
-      'Tempor lacus sodaleset conub accumsan ornare lifeTempor lacus sodaleset conub',
+      'End-to-end web solutions designed to solve complex problems and deliver seamless user experiences.',
     icon: (
       <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 6c-4 4-6 10-6 16h12c0-6-2-12-6-16z" fill="currentColor" opacity="0.1" />
@@ -88,7 +88,7 @@ const services = [
     id: 4,
     title: 'Web Development',
     description:
-      'Tempor lacus sodaleset conub accumsan ornare lifeTempor lacus sodaleset conub',
+      'Custom web applications built with modern frameworks, optimized for speed, scalability, and reliability.',
     icon: (
       <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 13l-8 9 8 9" strokeWidth="1.5" />
@@ -142,7 +142,8 @@ function SectionHeading() {
         initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
         animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
         transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="font-display text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark text-center mb-4"
+        className="text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark text-center mb-4 font-medium"
+        style={{ fontFamily: 'var(--font-sans)' }}
       >
         What We Offer
       </motion.h2>
@@ -151,7 +152,8 @@ function SectionHeading() {
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="text-[15px] text-gray-subtle leading-[24px] max-w-[460px] text-center"
+        className="text-[15px] leading-[24px] max-w-[460px] text-center"
+        style={{ color: '#1a1a1a' }}
       >
         We deliver end-to-end digital solutions tailored to your business needs.
       </motion.p>
@@ -178,7 +180,7 @@ function ServiceCard({ service, index }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       // overflow: visible so the rotated blue card can peek out
-      style={{ position: 'relative', overflow: 'visible', cursor: 'pointer' }}
+      style={{ position: 'relative', overflow: 'visible', cursor: 'default' }}
       className="flex flex-col items-center text-center px-5 pt-7 pb-6"
     >
 
@@ -242,12 +244,12 @@ function ServiceCard({ service, index }) {
         </div>
 
         {/* Title */}
-        <h3 className="font-display font-bold text-[16px] md:text-[18px] leading-[1.3] mb-2 text-gray-900">
+        <h3 className="font-bold text-[16px] md:text-[18px] leading-[1.3] mb-2 text-gray-900" style={{ fontFamily: 'var(--font-sans)' }}>
           {service.title}
         </h3>
 
         {/* Description */}
-        <p className="text-[12.5px] text-gray-400 leading-[20px] max-w-[200px] mb-4">
+        <p className="text-[12.5px] leading-[20px] max-w-[200px] mb-4" style={{ color: '#1a1a1a' }}>
           {service.description}
         </p>
 
@@ -277,7 +279,7 @@ function ServiceCard({ service, index }) {
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-white py-[50px] md:py-[80px]">
+    <section id="services" className="relative bg-white py-0">
       <SectionHeading />
       <div className="relative z-10 w-full max-w-[1100px] mx-auto px-5 md:px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 items-start">

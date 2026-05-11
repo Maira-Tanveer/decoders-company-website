@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import RecentWorks from '../components/RecentWorks'
 import Services from '../components/Services'
 import WhatWeDo from '../components/WhatWeDo'
+import HowWeWork from '../components/HowWeWork'
 import About from '../components/About'
 import Testimonials from '../components/Testimonials'
 import WaysToWork from '../components/WaysToWork'
@@ -33,6 +34,8 @@ export default function Home() {
       <SectionDivider />
       <WhatWeDo />
       <SectionDivider />
+      <HowWeWork />
+      <SectionDivider />
       <Services />
       <SectionDivider />
       <LogoTicker />
@@ -42,6 +45,7 @@ export default function Home() {
       <Testimonials />
       <SectionDivider />
       <WaysToWork />
+      <div className="py-6 md:py-10 bg-white" />
     </>
   )
 }

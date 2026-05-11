@@ -23,7 +23,8 @@ function SectionHeading() {
         initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
         animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
         transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="font-display text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark text-center mb-4"
+        className="text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark text-center mb-4 font-medium"
+        style={{ fontFamily: 'var(--font-sans)' }}
       >
         What we do
       </motion.h2>
@@ -32,7 +33,8 @@ function SectionHeading() {
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="text-[15px] text-gray-subtle leading-[24px] max-w-[520px] text-center"
+        className="text-[15px] leading-[24px] max-w-[520px] text-center"
+        style={{ color: '#1a1a1a' }}
       >
         We build intelligent systems and automate workflows to help businesses scale smarter.
       </motion.p>
@@ -504,7 +506,7 @@ function FeatureCard({ title, description, mockup, inputBar, index }) {
 
 export default function WhatWeDo() {
   return (
-    <section id="what-we-do" className="relative bg-white pt-[50px] md:pt-[80px] pb-[30px] md:pb-[50px]">
+    <section id="what-we-do" className="relative bg-white pt-0 pb-0">
       <SectionHeading />
 
       <div className="relative z-10 w-full max-w-[1500px] mx-auto px-5 md:px-10">

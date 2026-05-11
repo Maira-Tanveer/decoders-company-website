@@ -98,7 +98,7 @@ export default function About() {
   })
 
   return (
-    <section id="about" ref={sectionRef} className="relative bg-white py-20 md:py-32 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative bg-white py-0 overflow-hidden">
       <div className="w-full max-w-[900px] mx-auto px-5 md:px-10">
         <div className="flex flex-col items-center text-center">
           {/* About Us badge */}

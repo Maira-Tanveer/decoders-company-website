@@ -115,7 +115,7 @@ export default function LogoTicker() {
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section ref={ref} className="relative bg-white py-14 md:py-20 overflow-hidden">
+    <section ref={ref} className="relative bg-white py-0 overflow-hidden">
       {/* Header */}
       <div className="flex flex-col items-center text-center mb-10 md:mb-12 px-6">
         <motion.div
@@ -134,7 +134,8 @@ export default function LogoTicker() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-[22px] md:text-[32px] lg:text-[38px] leading-[1.2] tracking-tight font-semibold italic text-gray-900"
+          className="text-[22px] md:text-[32px] lg:text-[38px] leading-[1.2] tracking-tight font-medium text-gray-900"
+          style={{ fontFamily: 'var(--font-sans)' }}
         >
           Technologies We Work With
         </motion.h2>

@@ -1,4 +1,4 @@
-import logo from '../assets/logo.jpeg'
+import logo from '../assets/logo1.png'
 
 const navLinks = [
   { label: 'Overview', href: '#' },
@@ -46,12 +46,12 @@ export default function Footer() {
         {/* Top row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
           {/* Logo */}
-          <a href="#" className="shrink-0 block bg-black rounded-xl overflow-hidden px-4 py-2">
+          <a href="#" className="shrink-0 block">
             <img
               src={logo}
               alt="Decoders Digital"
-              className="h-[32px] md:h-[38px] w-auto object-contain"
-              style={{ filter: 'hue-rotate(45deg) saturate(1.8) brightness(1.2)' }}
+              className="h-[55px] md:h-[65px] w-auto object-contain"
+              style={{ filter: 'brightness(0) saturate(100%) invert(38%) sepia(52%) saturate(2800%) hue-rotate(237deg) brightness(97%) contrast(93%)' }}
             />
           </a>
 
@@ -61,7 +61,7 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[14px] text-gray-subtle hover:text-dark transition-colors font-medium"
+                className="text-[14px] font-medium" style={{ color: '#1a1a1a' }}
               >
                 {link.label}
               </a>
@@ -77,7 +77,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="w-10 h-10 rounded-lg border border-gray-300 flex items-center justify-center text-gray-subtle hover:text-primary hover:border-primary transition-all duration-300"
+                className="w-10 h-10 rounded-lg border border-gray-300 flex items-center justify-center hover:text-primary hover:border-primary transition-all duration-300" style={{ color: '#1a1a1a' }}
               >
                 {social.icon}
               </a>
@@ -89,7 +89,7 @@ export default function Footer() {
         <div className="w-full h-px bg-gray-300 mb-6" />
 
         {/* Copyright */}
-        <p className="text-center text-[13px] text-gray-subtle font-medium">
+        <p className="text-center text-[13px] font-medium" style={{ color: '#1a1a1a' }}>
           2024 Decodersdigital. All Rights Reserved
         </p>
       </div>

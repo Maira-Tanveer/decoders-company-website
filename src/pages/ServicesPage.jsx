@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Services from '../components/Services'
+import WhatWeDo from '../components/WhatWeDo'
+import HowWeWork from '../components/HowWeWork'
 import Footer from '../components/Footer'
 
 const serviceImages = {
@@ -111,7 +113,7 @@ function InlineImage({ src, alt, delay, floatY = 5, floatDuration = 3.2, rotateD
 
 function ServicesHero() {
   return (
-    <section className="relative bg-dark overflow-hidden py-16 md:py-24">
+    <section className="relative bg-dark overflow-hidden py-4 md:py-6">
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] opacity-15 blur-[120px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, #765EED, transparent 70%)' }}
@@ -153,7 +155,9 @@ export default function ServicesPage() {
     <>
       <Navbar />
       <ServicesHero />
-      <Services />
+      <div className="py-8 md:py-12 bg-white"><Services /></div>
+      <WhatWeDo />
+      <div className="pb-16 md:pb-24 bg-white"><HowWeWork /></div>
       <Footer />
     </>
   )

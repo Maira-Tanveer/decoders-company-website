@@ -112,7 +112,7 @@ function InlineImage({ src, alt, delay, floatY = 5, floatDuration = 3.2, rotateD
 
 function WorksHero() {
   return (
-    <section className="relative bg-dark overflow-hidden py-16 md:py-24">
+    <section className="relative bg-dark overflow-hidden py-4 md:py-6">
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] opacity-15 blur-[120px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, #765EED, transparent 70%)' }}
@@ -154,8 +154,8 @@ export default function WorksPage() {
     <>
       <Navbar />
       <WorksHero />
-      <RecentWorks />
-      <WaysToWork />
+      <div className="py-8 md:py-12 bg-white"><RecentWorks /></div>
+      <div className="py-8 md:py-12 bg-white"><WaysToWork /></div>
       <Footer />
     </>
   )

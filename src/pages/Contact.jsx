@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import logo from '../assets/logo.jpeg'
+import logo from '../assets/logo1.png'
 
 const contactImages = {
   handshake: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=600&fit=crop&crop=center&q=100',
@@ -112,7 +112,7 @@ function AnimatedChars({ text }) {
 
 function ContactHero() {
   return (
-    <section className="relative bg-dark overflow-hidden py-16 md:py-24">
+    <section className="relative bg-dark overflow-hidden py-4 md:py-6">
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] opacity-15 blur-[120px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, #765EED, transparent 70%)' }}
@@ -375,16 +375,16 @@ function ContactForm() {
                 <div
                   className="relative z-10 w-full rounded-2xl overflow-hidden flex items-center justify-center py-8 px-6"
                   style={{
-                    background: 'rgba(0,0,0,0.45)',
-                    border: '1px solid rgba(118,94,237,0.15)',
-                    boxShadow: '0 0 60px rgba(118,94,237,0.1), inset 0 1px 0 rgba(255,255,255,0.05)',
+                    background: 'transparent',
+                    border: 'none',
+                    boxShadow: 'none',
                   }}
                 >
                   <img
                     src={logo}
                     alt="Decoders Digital"
-                    className="w-full max-w-[220px] h-auto object-contain"
-                    style={{ filter: 'hue-rotate(45deg) saturate(1.8) brightness(1.2)' }}
+                    className="w-full max-w-[320px] h-auto object-contain"
+                    style={{ filter: 'brightness(0) saturate(100%) invert(38%) sepia(52%) saturate(2800%) hue-rotate(237deg) brightness(97%) contrast(93%)' }}
                   />
                 </div>
               </div>

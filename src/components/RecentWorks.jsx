@@ -85,7 +85,8 @@ function SectionHeading() {
         initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
         animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
         transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="font-display text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark text-center mb-4"
+        className="text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark text-center mb-4 font-medium"
+        style={{ fontFamily: 'var(--font-sans)' }}
       >
         Recent Works
       </motion.h2>
@@ -94,7 +95,8 @@ function SectionHeading() {
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="text-[15px] text-gray-subtle leading-[24px] max-w-[460px] text-center"
+        className="text-[15px] leading-[24px] max-w-[460px] text-center"
+        style={{ color: '#1a1a1a' }}
       >
         Real projects we've built for startups and enterprises — from MVP to scale.
       </motion.p>
@@ -131,37 +133,60 @@ function SlideUpLink({ text, href }) {
   )
 }
 
-const cursorSpring = { damping: 30, stiffness: 200, mass: 0.4 }
+const cursorSpring = { damping: 25, stiffness: 180, mass: 0.5 }
 const glowSpring = { damping: 25, stiffness: 120 }
 
-function StickyProjectCard({ project, index }) {
+function StickyProjectCard({ project, index, totalCards }) {
   const ref = useRef(null)
   const cardRef = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
+  const isLastCard = index === totalCards - 1
+
+  // Track scroll progress — 'start center' means animation begins when card top hits viewport center
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
 
-  // Smooth scroll-based scale
-  const scrollScaleRaw = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.97, 1, 1, 0.97])
-  const scrollScale = useSpring(scrollScaleRaw, { damping: 40, stiffness: 90 })
+  // Card scales down as it scrolls away
+  const scrollScale = useSpring(
+    useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 0.85], [0.9, 1, 1, isLastCard ? 1 : 0.93, isLastCard ? 1 : 0.85]),
+    { damping: 30, stiffness: 60 }
+  )
 
-  // Cursor tilt — motion values only, zero re-renders
+  // Card pushes down as the next card comes in
+  const scrollY = useSpring(
+    useTransform(scrollYProgress, [0.5, 0.85], [0, isLastCard ? 0 : 120]),
+    { damping: 30, stiffness: 60 }
+  )
+
+  // Card fades out as it goes behind the next card
+  const scrollOpacity = useTransform(scrollYProgress, [0.55, 0.85], [1, isLastCard ? 1 : 0.0])
+
+  // Strong forward tilt — card tips toward the user as it exits
+  const scrollRotateX = useSpring(
+    useTransform(scrollYProgress, [0.5, 0.85], [0, isLastCard ? 0 : 12]),
+    { damping: 30, stiffness: 60 }
+  )
+
+  // Cursor-driven tilt — motion values, zero re-renders
   const cursorX = useMotionValue(0.5)
   const cursorY = useMotionValue(0.5)
   const hoverOpacity = useMotionValue(0)
 
-  const tiltX = useSpring(useTransform(cursorY, [0, 1], [3, -3]), cursorSpring)
-  const tiltY = useSpring(useTransform(cursorX, [0, 1], [-3, 3]), cursorSpring)
+  const tiltX = useSpring(useTransform(cursorY, [0, 1], [5, -5]), cursorSpring)
+  const tiltY = useSpring(useTransform(cursorX, [0, 1], [-5, 5]), cursorSpring)
 
-  const hoverScaleRaw = useTransform(hoverOpacity, [0, 1], [1, 1.01])
+  const hoverScaleRaw = useTransform(hoverOpacity, [0, 1], [1, 1.015])
   const hoverScale = useSpring(hoverScaleRaw, cursorSpring)
   const smoothGlow = useSpring(hoverOpacity, glowSpring)
 
   // Combined scale: scroll * hover
   const combinedScale = useTransform([scrollScale, hoverScale], ([s, h]) => s * h)
+
+  // Combined rotateX: scroll + cursor
+  const combinedRotateX = useTransform([scrollRotateX, tiltX], ([sr, tr]) => sr + tr)
 
   // Glow radial gradient
   const glowBg = useTransform(
@@ -195,24 +220,31 @@ function StickyProjectCard({ project, index }) {
     cursorY.set(0.5)
   }
 
-  const stickyTop = 50 + index * 30
+  const stickyTop = 60 + index * 40
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 80 }}
+      initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 1, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 1.1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       className="w-full lg:sticky"
-      style={{ top: `${stickyTop}px`, zIndex: index + 1, perspective: 1200 }}
+      style={{
+        top: `${stickyTop}px`,
+        zIndex: index + 1,
+        perspective: 1400,
+      }}
     >
       <motion.div
         ref={cardRef}
         style={{
-          rotateX: tiltX,
+          rotateX: combinedRotateX,
           rotateY: tiltY,
           scale: combinedScale,
+          y: scrollY,
+          opacity: scrollOpacity,
           transformStyle: 'preserve-3d',
+          transformOrigin: 'center top',
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -309,13 +341,13 @@ function StickyProjectCard({ project, index }) {
 
 export default function RecentWorks() {
   return (
-    <section id="works" className="relative bg-white pb-[30px] md:pb-[50px]">
+    <section id="works" className="relative bg-white pb-0">
       <SectionHeading />
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-5 md:px-10 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-10">
-        <div className="flex flex-col gap-8 md:gap-12">
+        <div className="flex flex-col gap-10 md:gap-16 lg:pb-[25vh]">
           {projects.map((project, i) => (
-            <StickyProjectCard key={project.id} project={project} index={i} />
+            <StickyProjectCard key={project.id} project={project} index={i} totalCards={projects.length} />
           ))}
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import weDoImage from '../assets/we_do.png'
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
@@ -46,7 +47,7 @@ function ProjectBasedCard() {
               <h3 className="font-display text-[24px] md:text-[28px] leading-[1.2] text-dark">
                 Project Based
               </h3>
-              <p className="text-[15px] text-gray-subtle leading-[24px] max-w-[380px]">
+              <p className="text-[15px] leading-[24px] max-w-[380px]" style={{ color: '#1a1a1a' }}>
                 Best for clearly defined product builds, MVPs, or specific feature development.
               </p>
             </div>
@@ -54,7 +55,7 @@ function ProjectBasedCard() {
             {/* Delivery Time */}
             <div className="flex items-center gap-6 pt-4 mt-auto">
               <span className="text-[13px] text-gray-muted font-medium">Delivery Time</span>
-              <span className="text-[14px] text-gray-subtle">Based on scope and complexity</span>
+              <span className="text-[14px]" style={{ color: '#1a1a1a' }}>Based on scope and complexity</span>
             </div>
           </div>
 
@@ -65,7 +66,7 @@ function ProjectBasedCard() {
               <h4 className="font-display text-[36px] md:text-[48px] leading-[1.1] text-dark">
                 Fixed
               </h4>
-              <span className="text-[15px] text-gray-subtle">/ after discovery</span>
+              <span className="text-[15px]" style={{ color: '#1a1a1a' }}>/ after discovery</span>
             </div>
 
             {/* Divider */}
@@ -79,7 +80,7 @@ function ProjectBasedCard() {
                 'Senior engineers owning architecture and execution',
                 'Ideal for MVPs and focused product builds',
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3 text-gray-subtle">
+                <div key={i} className="flex items-start gap-3" style={{ color: '#1a1a1a' }}>
                   <CheckIcon />
                   <span className="text-[14px] leading-[20px] text-dark/80 font-medium">{item}</span>
                 </div>
@@ -129,19 +130,19 @@ function DedicatedTeamCard() {
                     shadow-[0_8px_48px_rgba(0,0,0,0.4)]
                     p-8 md:p-12"
         style={{
-          background: 'linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(20,20,30,0.9) 100%)',
+          background: 'linear-gradient(135deg, #0a0a0a 0%, #14141e 100%)',
         }}
       >
         {/* Background image */}
         <div
           className="absolute inset-0 opacity-30"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop&q=60)',
+            backgroundImage: `url(${weDoImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/60 to-dark/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/60 via-dark/40 to-dark/20" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Left Side */}
@@ -166,7 +167,7 @@ function DedicatedTeamCard() {
             {/* Delivery Time */}
             <div className="flex items-center gap-6 pt-4 mt-auto">
               <span className="text-[13px] text-white/40 font-medium">Delivery Time</span>
-              <span className="text-[14px] text-white/60">Ongoing, sprint-based delivery</span>
+              <span className="text-[14px]" style={{ color: '#1a1a1a' }}>Ongoing, sprint-based delivery</span>
             </div>
           </div>
 
@@ -231,7 +232,7 @@ export default function WaysToWork() {
   const isHeadingInView = useInView(headingRef, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative bg-white py-[30px] md:py-[50px]">
+    <section className="relative bg-white py-0">
       {/* Section Heading */}
       <div ref={headingRef} className="w-full max-w-[1180px] mx-auto px-5 md:px-10 mb-8 md:mb-12">
         <div className="flex flex-col items-center text-center gap-5">
@@ -251,7 +252,8 @@ export default function WaysToWork() {
             initial={{ opacity: 0, y: 25, filter: 'blur(8px)' }}
             animate={isHeadingInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark"
+            className="text-[32px] md:text-[48px] leading-[1.1] tracking-tight text-dark font-medium"
+            style={{ fontFamily: 'var(--font-sans)' }}
           >
             Ways to Work With Us
           </motion.h2>
@@ -259,7 +261,8 @@ export default function WaysToWork() {
             initial={{ opacity: 0, y: 15 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[16px] text-gray-subtle leading-[26px] max-w-[520px]"
+            className="text-[16px] leading-[26px] max-w-[520px]"
+            style={{ color: '#1a1a1a' }}
           >
             Whether you need a full product build or an embedded engineering team, we adapt to your workflow.
           </motion.p>

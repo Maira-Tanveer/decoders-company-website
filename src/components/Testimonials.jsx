@@ -51,13 +51,7 @@ function TestimonialCard({ testimonial, isHovered, onHover, index, isInView }) {
                   }`}
     >
       {/* Left border indicator */}
-      <motion.div
-        className="absolute left-0 top-3 bottom-3 w-[3.5px] rounded-full bg-primary"
-        initial={false}
-        animate={{ scaleY: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        style={{ originY: 0.5 }}
-      />
+      <div className="absolute left-0 top-0 bottom-0 w-[10px] rounded-r-full bg-gradient-to-r from-primary to-primary/20" />
 
       {/* Avatar */}
       <div className={`shrink-0 rounded-full p-[2px] transition-all duration-300 ${isHovered ? 'ring-2 ring-primary/40 ring-offset-2' : ''}`}>
@@ -115,7 +109,7 @@ export default function Testimonials() {
   }, [isPaused, nextTestimonial])
 
   return (
-    <section className="relative bg-white py-[30px] md:py-[50px]">
+    <section className="relative bg-white py-0">
       <div className="w-full max-w-[1060px] mx-auto px-5 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           {/* Right — Heading & Description */}
@@ -147,7 +141,8 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
               animate={isHeadingInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
               transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-              className="font-sans text-[24px] sm:text-[28px] md:text-[34px] font-extrabold leading-[1.15] tracking-[-0.025em] text-dark mb-5"
+              className="text-[24px] sm:text-[28px] md:text-[34px] font-medium leading-[1.15] tracking-[-0.025em] text-dark mb-5"
+              style={{ fontFamily: 'var(--font-sans)' }}
             >
               What Our Valuable
               <br />
@@ -177,7 +172,7 @@ export default function Testimonials() {
             onMouseLeave={() => setIsPaused(false)}
           >
             {testimonials.map((testimonial, i) => {
-              const offsets = ['md:ml-8', 'md:-ml-6', 'md:ml-8']
+              const offsets = ['md:ml-8 md:mr-0', 'md:-ml-10 md:mr-10', 'md:ml-8 md:mr-0']
               return (
                 <div key={testimonial.id} className={offsets[i % offsets.length]}>
                   <TestimonialCard
