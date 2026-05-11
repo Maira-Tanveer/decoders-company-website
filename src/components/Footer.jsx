@@ -56,12 +56,12 @@ export default function Footer() {
           </a>
 
           {/* Nav links */}
-          <nav className="flex items-center gap-8 lg:gap-12">
+          <nav className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 lg:gap-12">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[14px] font-medium" style={{ color: '#1a1a1a' }}
+                className="text-[13px] sm:text-[14px] font-medium" style={{ color: '#1a1a1a' }}
               >
                 {link.label}
               </a>

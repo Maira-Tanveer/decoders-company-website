@@ -167,7 +167,7 @@ function DedicatedTeamCard() {
             {/* Delivery Time */}
             <div className="flex items-center gap-6 pt-4 mt-auto">
               <span className="text-[13px] text-white/40 font-medium">Delivery Time</span>
-              <span className="text-[14px]" style={{ color: '#1a1a1a' }}>Ongoing, sprint-based delivery</span>
+              <span className="text-[14px] text-white/60">Ongoing, sprint-based delivery</span>
             </div>
           </div>
 

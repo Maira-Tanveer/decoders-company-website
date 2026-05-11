@@ -328,12 +328,12 @@ function WebMobileMockup() {
 
       {/* Center circular badge */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative w-[110px] h-[110px] flex items-center justify-center">
+        <div className="relative w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] flex items-center justify-center">
           <div className="absolute inset-0 rounded-full border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(34,211,238,0.2)]" />
           <div className="absolute inset-[3px] rounded-full border border-cyan-400/20" />
-          <div className="flex flex-col items-center bg-[#1a1d23] rounded-full w-[94px] h-[94px] justify-center">
-            <span className="text-[26px] font-bold text-white leading-none">100+</span>
-            <span className="text-[9px] text-gray-400 mt-1">Apps & Interfaces</span>
+          <div className="flex flex-col items-center bg-[#1a1d23] rounded-full w-[76px] h-[76px] sm:w-[94px] sm:h-[94px] justify-center">
+            <span className="text-[20px] sm:text-[26px] font-bold text-white leading-none">100+</span>
+            <span className="text-[8px] sm:text-[9px] text-gray-400 mt-1">Apps & Interfaces</span>
           </div>
         </div>
       </div>
@@ -530,7 +530,7 @@ export default function WhatWeDo() {
         </div>
 
         {/* Row 2 — 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-5 md:mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6 mt-5 md:mt-6">
           <FeatureCard
             index={2}
             title="Web / Mobile Solutions"

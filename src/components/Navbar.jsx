@@ -38,8 +38,8 @@ export default function Navbar() {
         <svg
           viewBox="0 0 1440 44"
           preserveAspectRatio="none"
-          className="absolute top-0 left-0 w-full h-full"
-          style={{ display: 'block' }}
+          className="absolute top-0 left-0 w-full h-full hidden sm:block"
+          style={{ display: undefined }}
         >
           {/* Full dark background first */}
           <rect width="1440" height="44" fill="#1a1a1a" />
@@ -64,12 +64,12 @@ export default function Navbar() {
           className="absolute left-1/2 -translate-x-1/2 z-10"
           style={{ top: '2px' }}
         >
-          <div className="flex items-center gap-2 px-5 py-1.5 whitespace-nowrap">
+          <div className="flex items-center gap-2 px-3 sm:px-5 py-1.5 whitespace-nowrap">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
             </span>
-            <span className="text-xs font-medium" style={{ color: '#1a1a1a' }}>
+            <span className="text-[10px] sm:text-xs font-medium sm:text-[#1a1a1a] text-white/80">
               Available for New Projects
             </span>
           </div>

@@ -268,7 +268,7 @@ function StickyProjectCard({ project, index, totalCards }) {
             style={{ opacity: smoothGlow }}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_580px_1fr] relative z-1">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(300px,580px)_1fr] relative z-1">
             {/* LEFT */}
             <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 gap-8 lg:gap-16">
               <div className="flex flex-col gap-5">

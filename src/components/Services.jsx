@@ -219,7 +219,7 @@ function ServiceCard({ service, index }) {
         style={{ zIndex: 2 }}
       >
         {/* Icon blob */}
-        <div className="relative w-[100px] h-[114px] flex items-center justify-center mb-4">
+        <div className="relative w-[80px] h-[92px] sm:w-[100px] sm:h-[114px] flex items-center justify-center mb-4">
           <svg
             viewBox="0 0 114 128"
             className="absolute inset-0 w-full h-full"
@@ -249,7 +249,7 @@ function ServiceCard({ service, index }) {
         </h3>
 
         {/* Description */}
-        <p className="text-[12.5px] leading-[20px] max-w-[200px] mb-4" style={{ color: '#1a1a1a' }}>
+        <p className="text-[13px] sm:text-[12.5px] leading-[20px] max-w-[240px] sm:max-w-[200px] mb-4" style={{ color: '#1a1a1a' }}>
           {service.description}
         </p>
 

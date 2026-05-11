@@ -198,7 +198,7 @@ export default function CTA() {
             </motion.div>
 
             {/* ✦ PREMIUM CONTACT CARDS ✦ */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-3.5 w-full">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 md:gap-3.5 w-full">
               {contactInfo.map((item, i) => (
                 <motion.a
                   key={item.label}
@@ -210,7 +210,7 @@ export default function CTA() {
                   transition={{ duration: 0.5, delay: 0.7 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   whileHover={{ y: -4 }}
                   className="group relative flex flex-col items-start text-left
-                             px-5 py-[22px] cursor-pointer overflow-hidden
+                             px-3.5 sm:px-5 py-4 sm:py-[22px] cursor-pointer overflow-hidden
                              bg-[#fafafa] rounded-[20px]
                              border border-[#f0f0f0]
                              hover:bg-white
@@ -226,7 +226,7 @@ export default function CTA() {
 
                   {/* Icon box */}
                   <div
-                    className="w-[46px] h-[46px] rounded-[14px] flex items-center justify-center mb-[18px]
+                    className="w-[38px] h-[38px] sm:w-[46px] sm:h-[46px] rounded-[12px] sm:rounded-[14px] flex items-center justify-center mb-3 sm:mb-[18px]
                                bg-white border border-[#ebebeb]
                                group-hover:bg-primary group-hover:border-primary
                                group-hover:shadow-[0_6px_20px_rgba(118,94,237,0.30)]
@@ -239,7 +239,7 @@ export default function CTA() {
 
                   {/* Label */}
                   <span
-                    className="text-[10px] font-semibold tracking-[0.1em] uppercase
+                    className="text-[11px] sm:text-[10px] font-semibold tracking-[0.1em] uppercase
                                text-gray-400 group-hover:text-primary
                                transition-colors duration-300 mb-[5px]"
                   >
@@ -247,7 +247,7 @@ export default function CTA() {
                   </span>
 
                   {/* Value */}
-                  <span className="text-[12.5px] text-dark font-medium leading-[1.5] break-words">
+                  <span className="text-[11px] sm:text-[12.5px] text-dark font-medium leading-[1.5] break-words">
                     {item.value}
                   </span>
 

@@ -7,7 +7,7 @@ export default function SectionDivider() {
 
   return (
     <div ref={ref} className="w-full flex justify-center py-6 md:py-10 bg-white overflow-hidden">
-      <div className="relative flex items-center justify-center w-full max-w-[600px] px-10">
+      <div className="relative flex items-center justify-center w-full max-w-[600px] px-5 md:px-10">
         {/* Left line with fade */}
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}

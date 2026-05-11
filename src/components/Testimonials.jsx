@@ -172,7 +172,7 @@ export default function Testimonials() {
             onMouseLeave={() => setIsPaused(false)}
           >
             {testimonials.map((testimonial, i) => {
-              const offsets = ['md:ml-8 md:mr-0', 'md:-ml-10 md:mr-10', 'md:ml-8 md:mr-0']
+              const offsets = ['md:ml-4 lg:ml-8 md:mr-0', 'md:-ml-4 lg:-ml-10 md:mr-4 lg:mr-10', 'md:ml-4 lg:ml-8 md:mr-0']
               return (
                 <div key={testimonial.id} className={offsets[i % offsets.length]}>
                   <TestimonialCard

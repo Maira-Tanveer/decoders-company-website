@@ -90,7 +90,7 @@ function AnalyzeMockup() {
             : { duration: 0.4, delay: (rowIdx * 3 + colIdx) * 0.04 }
         }
         whileHover={icon && !isCenter ? { scale: 1.15, y: -5 } : {}}
-        className={`w-14 h-14 rounded-xl flex items-center justify-center cursor-default relative overflow-hidden ${
+        className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center cursor-default relative overflow-hidden ${
           isCenter
             ? 'border border-[#765EED]/30'
             : icon
@@ -272,7 +272,7 @@ function CodeEditorMockup() {
       </div>
 
       {/* Code area */}
-      <div className="relative flex-1 px-4 pb-4 font-mono text-[13px] leading-[22px] overflow-hidden">
+      <div className="relative flex-1 px-3 sm:px-4 pb-4 font-mono text-[11px] sm:text-[13px] leading-[20px] sm:leading-[22px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

@@ -221,7 +221,7 @@ function ContactForm() {
   return (
     <section ref={ref} style={{ backgroundColor: '#F2F2F2' }} className="py-12 md:py-16">
       <div className="w-full max-w-[1100px] mx-auto px-5 md:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-start">
 
           {/* Left — Form */}
           <motion.div
@@ -236,7 +236,7 @@ function ContactForm() {
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[13px] font-semibold text-dark">Your Name</label>
+                <label className="text-[14px] sm:text-[13px] font-semibold text-dark">Your Name</label>
                 <input
                   type="text"
                   name="name"
@@ -250,7 +250,7 @@ function ContactForm() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[13px] font-semibold text-dark">Your Email</label>
+                <label className="text-[14px] sm:text-[13px] font-semibold text-dark">Your Email</label>
                 <input
                   type="email"
                   name="email"
@@ -264,7 +264,7 @@ function ContactForm() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[13px] font-semibold text-dark">How can we help?</label>
+                <label className="text-[14px] sm:text-[13px] font-semibold text-dark">How can we help?</label>
                 <div className="relative">
                   <select
                     name="service"
@@ -289,7 +289,7 @@ function ContactForm() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[13px] font-semibold text-dark">Project Description</label>
+                <label className="text-[14px] sm:text-[13px] font-semibold text-dark">Project Description</label>
                 <textarea
                   name="description"
                   value={formData.description}
@@ -321,7 +321,7 @@ function ContactForm() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex justify-center lg:justify-end lg:pt-10"
+            className="flex justify-center md:justify-end md:pt-10"
           >
             <div
               className="relative w-full max-w-[400px] aspect-[3/4] rounded-3xl bg-dark overflow-hidden
@@ -470,9 +470,9 @@ function MapSection() {
             className="w-full h-[300px] sm:h-[380px] md:h-[420px]"
           />
 
-          <div className="absolute bottom-5 left-5 bg-white/95 backdrop-blur-md rounded-xl
-                          px-5 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-black/[0.04]
-                          max-w-[300px]">
+          <div className="absolute bottom-3 left-3 sm:bottom-5 sm:left-5 bg-white/95 backdrop-blur-md rounded-xl
+                          px-3.5 py-3 sm:px-5 sm:py-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-black/[0.04]
+                          max-w-[240px] sm:max-w-[300px]">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#765EED" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

@@ -92,7 +92,7 @@ const logos = [
 
 const LogoCard = ({ logo }) => (
   <motion.div
-    className="group relative shrink-0 mx-8 md:mx-12 cursor-default"
+    className="group relative shrink-0 mx-4 sm:mx-8 md:mx-12 cursor-default"
     whileHover={{ y: -3, scale: 1.08 }}
     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
   >
